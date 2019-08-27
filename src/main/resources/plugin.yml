@@ -1,0 +1,19 @@
+main: yy.gourlitburo.yeyaafk.Main
+name: YeyaAFK
+version: 0.0.0
+api-version: 1.14
+author: Zack Guard
+description: An AFK plugin.
+commands:
+  yeyaafk:
+    aliases: [afk]
+    description: Use YeyaAFK.
+    # usage: "Usage: /yc reload"
+    # permission: yeyachat.manage
+# permissions:
+#   yeyachat.manage:
+#     default: op
+#   yeyachat.ping:
+#     default: true
+#   yeyachat.ping.immune:
+#     default: false

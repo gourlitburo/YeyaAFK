@@ -17,13 +17,7 @@ class CommandHandler implements CommandExecutor {
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
     if (args.length == 0 && sender instanceof Player) { // toggle self AFK
       Player player = (Player) sender;
-      boolean wasAFK = plugin.isPlayerAFK(player);
-
-      plugin.setPlayerAFK(player, !wasAFK);
-
-      if (!wasAFK) player.sendMessage("You are now AFK.");
-      else player.sendMessage("You are no longer AFK.");
-      
+      plugin.setPlayerAFK(player, !plugin.isPlayerAFK(player));
       return true;
     }
     return false;

@@ -14,7 +14,7 @@ class LastMoveTimer implements Runnable {
   public void run() {
     for (Player player : plugin.server.getOnlinePlayers()) {
       Long lastMoveTime = plugin.getPlayerLastMoveTime(player);
-      if (lastMoveTime != null && plugin.getTime() - lastMoveTime > plugin.TIMEOUT) {
+      if (lastMoveTime != null && plugin.getTime() - lastMoveTime > plugin.getConfig().getLong("timeout") * 1000) {
         plugin.setPlayerAFK(player, true);
       }
     }

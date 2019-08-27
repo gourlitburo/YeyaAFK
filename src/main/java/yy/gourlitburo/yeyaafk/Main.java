@@ -22,13 +22,9 @@ public class Main extends JavaPlugin {
   Server server = getServer();
   PluginManager manager = Bukkit.getPluginManager();
 
-  // final long TIMEOUT = 2 * 60 * 1000; // 2 minutes
-  // final long CHECK_PERIOD = 200; // 200 ticks ~= 10 seconds
-  final long TIMEOUT = 5 * 1000; // 5 seconds
-  final long CHECK_PERIOD = 100; // 100 ticks ~= 5 seconds
-
   private final String TEAM_NAME = "yeyaafk_afk";
-  private final String TEAM_PREFIX = "[AFK] ";
+  final String PERM_MANAGE = "yeyaafk.manage";
+  final long CHECK_PERIOD = 200; // 200 ticks ~= 10 seconds
 
   private List<Player> afkPlayers = new ArrayList<Player>();
   private Map<String, Long> lastMoveTimes = new HashMap<String, Long>();
@@ -82,7 +78,8 @@ public class Main extends JavaPlugin {
     if (!teamAlreadyExists) {
       team = scoreboard.registerNewTeam(TEAM_NAME);
     }
-    team.setPrefix(TEAM_PREFIX);
+    team.setPrefix(getConfig().getString("display.prefix"));
+    team.setSuffix(getConfig().getString("display.suffix"));
 
     // register command
     PluginCommand command = getCommand("yeyaafk");
@@ -94,6 +91,9 @@ public class Main extends JavaPlugin {
     // schedule timer
     server.getScheduler().scheduleSyncRepeatingTask(this, new LastMoveTimer(this), 0, CHECK_PERIOD);
 
+    // copy default config if not exist
+    saveDefaultConfig();
+
     // tell oniichan we are ready~⭐
     logger.info("YeyaAFK ready.");
   }
@@ -103,6 +103,13 @@ public class Main extends JavaPlugin {
     for (String name : team.getEntries()) {
       team.removeEntry(name);
     }
+  }
+
+  @Override
+  public void reloadConfig() {
+    super.reloadConfig();
+    team.setPrefix(getConfig().getString("display.prefix"));
+    team.setSuffix(getConfig().getString("display.suffix"));
   }
 
 }

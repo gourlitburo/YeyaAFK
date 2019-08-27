@@ -33,22 +33,22 @@ class PlayerEventHandler implements Listener {
 
   @EventHandler
   public void onPlayerMove(PlayerMoveEvent event) {
-    handleEvent(event);
+    if (plugin.getConfig().getBoolean("auto_exit.move")) handleEvent(event);
   }
 
   @EventHandler
   public void onPlayerInteract(PlayerInteractEvent event) {
-    handleEvent(event);
+    if (plugin.getConfig().getBoolean("auto_exit.interact")) handleEvent(event);
   }
 
   @EventHandler
   public void onPlayerChat(AsyncPlayerChatEvent event) {
-    handleEvent(event);
+    if (plugin.getConfig().getBoolean("auto_exit.chat")) handleEvent(event);
   }
 
   @EventHandler
   public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-    handleEvent(event);
+    if (plugin.getConfig().getBoolean("auto_exit.command")) handleEvent(event);
   }
 
 }

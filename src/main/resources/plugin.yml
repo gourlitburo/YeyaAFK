@@ -8,12 +8,7 @@ commands:
   yeyaafk:
     aliases: [afk]
     description: Use YeyaAFK.
-    # usage: "Usage: /yc reload"
-    # permission: yeyachat.manage
-# permissions:
-#   yeyachat.manage:
-#     default: op
-#   yeyachat.ping:
-#     default: true
-#   yeyachat.ping.immune:
-#     default: false
+    usage: "Usage: /afk [reload]"
+permissions:
+  yeyaafk.manage:
+    default: op

@@ -1,0 +1,9 @@
+timeout: 120
+display:
+  prefix: "[AFK] "
+  suffix: ""
+auto_exit:
+  move: true
+  interact: true
+  chat: true
+  command: true

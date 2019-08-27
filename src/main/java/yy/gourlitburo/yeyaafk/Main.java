@@ -22,8 +22,8 @@ public class Main extends JavaPlugin {
   private static String TEAM_NAME = "yeyaafk_afk";
   private static String TEAM_PREFIX = "[AFK] ";
 
-  List<Player> afkPlayers = new ArrayList<Player>();
-  Team team;
+  private List<Player> afkPlayers = new ArrayList<Player>();
+  private Team team;
 
   boolean isPlayerAFK(Player player) {
     return afkPlayers.contains(player);

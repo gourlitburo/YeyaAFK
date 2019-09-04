@@ -23,6 +23,7 @@ class CommandHandler implements CommandExecutor {
       if (!sender.hasPermission(plugin.PERM_MANAGE)) sender.sendMessage(plugin.PERM_MANAGE + " permission required.");
       else {
         plugin.reloadConfig();
+        plugin.processConfig();
         sender.sendMessage("Reloaded.");
       }
       return true;

@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,7 +16,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 public class Main extends JavaPlugin {
-  
   Logger logger = getLogger();
   Server server = getServer();
   PluginManager manager = Bukkit.getPluginManager();
@@ -78,20 +76,11 @@ public class Main extends JavaPlugin {
     if (!teamAlreadyExists) {
       team = scoreboard.registerNewTeam(TEAM_NAME);
     }
-    team.setPrefix(getConfig().getString("display.prefix"));
-    team.setSuffix(getConfig().getString("display.suffix"));
+    processConfig();
 
-    // register command
-    PluginCommand command = getCommand("yeyaafk");
-    command.setExecutor(new CommandHandler(this));
-
-    // register events
+    getCommand("yeyaafk").setExecutor(new CommandHandler(this));
     manager.registerEvents(new PlayerEventHandler(this), this);
-
-    // schedule timer
     server.getScheduler().scheduleSyncRepeatingTask(this, new LastMoveTimer(this), 0, CHECK_PERIOD);
-
-    // copy default config if not exist
     saveDefaultConfig();
 
     // tell oniichan we are ready~⭐
@@ -105,11 +94,8 @@ public class Main extends JavaPlugin {
     }
   }
 
-  @Override
-  public void reloadConfig() {
-    super.reloadConfig();
+  void processConfig() {
     team.setPrefix(getConfig().getString("display.prefix"));
     team.setSuffix(getConfig().getString("display.suffix"));
   }
-
 }

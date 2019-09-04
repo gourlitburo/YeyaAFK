@@ -9,9 +9,9 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 class PlayerEventHandler implements Listener {
-
   private Main plugin;
 
   public PlayerEventHandler(Main instance) {
@@ -21,6 +21,11 @@ class PlayerEventHandler implements Listener {
   @EventHandler
   public void onPlayerJoin(PlayerJoinEvent event) {
     plugin.setPlayerLastMoveTime(event.getPlayer(), plugin.getTime());
+  }
+
+  @EventHandler
+  public void onPlayerQuit(PlayerQuitEvent event) {
+    plugin.setPlayerAFK(event.getPlayer(), false, true);
   }
 
   private void handleEvent(PlayerEvent event) {
@@ -50,5 +55,4 @@ class PlayerEventHandler implements Listener {
   public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
     if (plugin.getConfig().getBoolean("auto_exit.command")) handleEvent(event);
   }
-
 }

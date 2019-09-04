@@ -37,6 +37,10 @@ public class Main extends JavaPlugin {
   }
 
   void setPlayerAFK(Player player, boolean afkStatus) {
+    setPlayerAFK(player, afkStatus, false);
+  }
+
+  void setPlayerAFK(Player player, boolean afkStatus, boolean silent) {
     String playerName = player.getName();
     String message;
     if (isPlayerAFK(player) == afkStatus) return;
@@ -50,7 +54,7 @@ public class Main extends JavaPlugin {
       message = String.format("&7%s&7 is no longer AFK.", playerName);
     }
     player.setInvulnerable(afkStatus);
-    server.broadcastMessage(ChatColor.translateAlternateColorCodes('&', message));
+    if (!silent) server.broadcastMessage(ChatColor.translateAlternateColorCodes('&', message));
   }
 
   Long getPlayerLastMoveTime(Player player) {
@@ -91,6 +95,9 @@ public class Main extends JavaPlugin {
   public void onDisable() {
     for (String name : team.getEntries()) {
       team.removeEntry(name);
+    }
+    for (Player player : afkPlayers) {
+      player.setInvulnerable(false);
     }
   }
 

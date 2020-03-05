@@ -53,7 +53,7 @@ public class Main extends JavaPlugin {
       team.removeEntry(playerName);
       message = String.format("&7%s&7 is no longer AFK.", playerName);
     }
-    player.setInvulnerable(afkStatus);
+    if (getConfig().getBoolean("invulnerable")) player.setInvulnerable(afkStatus);
     if (!silent) server.broadcastMessage(ChatColor.translateAlternateColorCodes('&', message));
   }
 

@@ -18,6 +18,7 @@ class CommandHandler implements CommandExecutor {
     if (args.length == 0 && sender instanceof Player) { // toggle self AFK
       Player player = (Player) sender;
       plugin.setPlayerAFK(player, !plugin.isPlayerAFK(player));
+      plugin.updatePlayerLastMoveTime(player);
       return true;
     } else if (args.length == 1 && args[0].equals("reload")) {
       if (!sender.hasPermission(plugin.PERM_MANAGE)) sender.sendMessage(plugin.PERM_MANAGE + " permission required.");

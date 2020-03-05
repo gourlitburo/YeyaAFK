@@ -65,6 +65,10 @@ public class Main extends JavaPlugin {
     lastMoveTimes.put(player.getName(), time);
   }
 
+  void updatePlayerLastMoveTime(Player player) {
+    lastMoveTimes.put(player.getName(), getTime());
+  }
+
   @Override
   public void onEnable() {
     // setup team, creating if necessary
